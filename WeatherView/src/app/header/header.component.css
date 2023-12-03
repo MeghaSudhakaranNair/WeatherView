@@ -1,0 +1,30 @@
+.nav-link {
+    font-family: 'Inika', serif;
+    color: white;
+    text-decoration: none; /* Optional: Removes underline from links */
+    margin: 0 30px; /* Optional: Adds spacing between links */
+    /* Add other styling as needed */
+  }
+
+  :host {
+    display: block;
+    width: 100%; /* Ensure the navbar stretches across the full width */
+  }
+  
+  nav {
+    background-color: #54AFC3; /* Set the background color */
+    height: 60px; /* Increase the height as desired */
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* This helps vertically center the content */
+    padding: 0 15px; /* Add some horizontal padding */
+    /* Add other styles as needed */
+  }
+  
+  .nav-link:hover {
+    text-decoration: underline;
+  }
+
+  .navbar-right {
+    display: flex;
+  }
