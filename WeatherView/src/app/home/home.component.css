@@ -1,0 +1,72 @@
+:host {
+    display: block;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+  }
+  
+  .home-container {
+    background-image: url('../../assets/images/Home-background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-height: 200vh; /* Enough height to include both sections */
+    width: 100vw;
+    position: relative; /* Use relative for child absolute positioning */
+  }
+  
+  .center-container {
+    position: absolute;
+    top: 25%; /* Center in the first half of the home-container */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Styles for logo, text, and buttons remain the same */
+  
+  .carousel-container {
+    position: absolute;
+    top: 100vh; /* Start the carousel after the height of the viewport */
+    left: 0;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    scroll-snap-type: x mandatory;
+  }
+  
+  .carousel-item {
+    flex: none;
+    width: 100vw;
+    scroll-snap-align: start;
+    margin-right: 20px;
+  }
+
+  .text-below-logo{
+    font-family: 'Inika', serif;
+    color: white;
+  }
+
+  .content-container .mat-button.custom-button {
+    background-color: black;
+    color: white; /* Ensure this overrides Material's styles */
+    font-family: 'Inika', serif;
+    border-radius: 30px;
+    padding: 10px 30px;
+    margin: 5px;
+  }
+
+  .custom-button {
+    background-color: black;
+    color: white !important; /* Set text color to white */
+    font-family: 'Inika', serif; /* Apply Inika font */
+    border-radius: 30px; /* Elliptical shape */
+    padding: 10px 30px; /* Adjust padding to ensure buttons are of the same size */
+    margin: 5px; /* Add some space between buttons */
+    /* Additional styling as needed */
+  }
+  
