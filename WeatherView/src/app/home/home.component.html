@@ -12,12 +12,24 @@
           </div>
       </div>
     
-      <div class="carousel-container">
-        <mat-card class="carousel-item" *ngFor="let item of items">
-          <mat-card-content>
-            {{ item.content }}
-          </mat-card-content>
-        </mat-card>
-      </div>
-    
+      <!-- carousel -->
+<div class="container">
+<div class="carousel">
+    <ng-container *ngFor="let slide of slides; let i = index">
+        <img
+          [src]="slide.src"
+          class="slide"
+          *ngIf="i === currentSlideIndex"
+        />
+      </ng-container>
+  
+    <!-- controls -->
+    <button class="control prev" (click)="previousSlide()">
+        <span class="arrow left"></span>
+      </button>
+      <button class="control next" (click)="nextSlide()">
+        <span class="arrow right"></span>
+      </button>
+  </div>
+ </div>   
 </div>
