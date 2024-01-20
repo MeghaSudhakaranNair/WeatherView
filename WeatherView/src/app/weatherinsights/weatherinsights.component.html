@@ -1,1 +1,56 @@
-<p>weatherinsights works!</p>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- <mat-form-field class="example-full-width">
+    <input matInput [(ngModel)]="searchLocation" placeholder="Enter location">
+    <button mat-icon-button matSuffix (click)="getWeatherData()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field> -->
+  
+  <mat-form-field appearance="outline" class="search-field">
+    <input matInput placeholder="Enter location" class="search-input">
+    <button matSuffix mat-fab>
+      <mat-icon >search</mat-icon>
+    </button>
+    
+  </mat-form-field>
+
+  
+
+<div class="widget-space">
+    <!-- Widget space -->
+</div>
+
+<div class="filter-graph-container">
+    
+  </div>
+    <label for="parameter-select">Choose a parameter:</label>
+    <select id="parameter-select" [(ngModel)]="selectedParameter" (change)="onParameterChange()">
+        <option *ngFor="let param of availableParameters" [value]="param">{{ param }}</option>
+    </select>
+
+  
+  <div>
+    <label for="chart-type-select">Choose chart type:</label>
+    <select id="chart-type-select" [(ngModel)]="selectedChartType" (change)="onChartTypeChange()">
+      <option value="line">Line</option>
+      <option value="bar">Bar</option>
+      <option value="area">Area</option>
+    </select>
+  </div>
+  
+  
+  <div *ngIf="chartOptions">
+    <apx-chart [series]="chartOptions?.series"
+               [chart]="chartOptions?.chart"
+               [xaxis]="chartOptions?.xaxis"
+               [yaxis]="chartOptions?.yaxis"
+               [dataLabels]="chartOptions?.dataLabels"
+               [title]="chartOptions?.title"
+               [stroke]="chartOptions?.stroke"
+               [tooltip]="chartOptions?.tooltip">
+    </apx-chart>
+  </div>
+   
+  <div>
+  

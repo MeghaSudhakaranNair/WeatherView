@@ -1,0 +1,67 @@
+.widget-space {
+    height: 100vh; /* Adjust this as needed */
+    background-color: #ffffff;
+  }
+
+  .filter-graph-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .filter-graph-container select {
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+  }
+  
+  .apx-chart {
+    width: 100%;
+    max-width: 600px; /* Adjust as needed */
+  }
+
+  .search-field {
+    width: 50%; /* Adjust the width as needed */
+    display: flex;
+    justify-content: center;
+    margin-left: 25%;
+    margin-top: 30px; 
+  }
+ 
+
+
+ 
+
+
+button[mat-fab] {
+  
+  background-color: transparent !important; /* Transparent background */
+  color: #000; /* Text/icon color, adjust as needed */
+  /* Set size to fit the icon */
+  width: 40px; /* Adjust based on icon size */
+  height: 40px; /* Same as width for circle */
+  border-radius: 50%; /* Circular shape */
+
+  font-size: 24px; /* Adjust icon size if needed */
+  text-align: center;      /* Center the icon horizontally */
+  display: flex;           /* Use flexbox for alignment */
+  justify-content: center; /* Center content horizontally in flex container */
+  align-items: center;     /* Center content vertically in flex container */
+  margin:10px;
+}
+
+button[mat-fab]:hover {
+  background-color: #f7f6f6dd !important; /* Grey color on hover */
+  opacity: 1; /* Make button fully visible on hover */
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-underline {
+  display: none !important;
+}
+
+mat-icon {
+  opacity:1;
+  margin: 0; /* Remove any default margin from the icon */
+}
+  
