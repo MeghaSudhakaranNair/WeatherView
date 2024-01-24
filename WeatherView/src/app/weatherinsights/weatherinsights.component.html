@@ -1,15 +1,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- <mat-form-field class="example-full-width">
-    <input matInput [(ngModel)]="searchLocation" placeholder="Enter location">
-    <button mat-icon-button matSuffix (click)="getWeatherData()">
-      <mat-icon>search</mat-icon>
-    </button>
-  </mat-form-field> -->
+
   
-  <mat-form-field appearance="outline" class="search-field">
-    <input matInput placeholder="Enter location" class="search-input">
-    <button matSuffix mat-fab>
+  <mat-form-field appearance="fill" class="search-field">
+    <input matInput placeholder="Enter location" [(ngModel)]="searchLocation" class="search-input">
+    <button matSuffix mat-fab (click)="getWeatherData()">
       <mat-icon >search</mat-icon>
     </button>
     
@@ -18,7 +13,67 @@
   
 
 <div class="widget-space">
-    <!-- Widget space -->
+    <div class="upper-data">
+      <!-- <img src="../../assets/images/sunny.jpeg" *ngIf="14>15"> -->
+      <img src="../../assets/images/cold.jpeg" *ngIf="15>11">
+      <!-- <img src="../../assets/images/cloudy.jpeg" *ngIf="14>15"> -->
+      <div class="weather-data">
+        <div class="location">London</div>
+        <div class="temp">{{14.40|number: '1.0-0'}} °C</div>
+
+
+      </div>
+    </div>
+
+
+    <div class="lower-data">
+      <div class="more-info-label">
+        More Information
+      </div>
+      <div class="more-info-container">
+        <div class="info-box">
+          <div class="info-box-label">
+            <img src="../../assets/images/humidity.png">
+            <span>Humidity</span>
+          </div>
+          <div class="info-box-value">
+            10°C
+          </div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-box-label">
+            <img src="../../assets/images/temperature.png">
+            <span>Min Temp</span>
+          </div>
+          <div class="info-box-value">
+            10°C
+          </div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-box-label">
+            <img src="../../assets/images/global-warming.png">
+            <span>Max Temp</span>
+          </div>
+          <div class="info-box-value">
+            10°C
+          </div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-box-label">
+            <img src="../../assets/images/windy.png">
+            <span>Wind</span>
+          </div>
+          <div class="info-box-value">
+            10°C
+          </div>
+        </div>
+
+      </div>
+
+    </div>
 </div>
 
 <div class="filter-graph-container">

@@ -23,6 +23,7 @@
 
   .search-field {
     width: 50%; /* Adjust the width as needed */
+    height: 70px;
     display: flex;
     justify-content: center;
     margin-left: 25%;
@@ -39,8 +40,8 @@ button[mat-fab] {
   background-color: transparent !important; /* Transparent background */
   color: #000; /* Text/icon color, adjust as needed */
   /* Set size to fit the icon */
-  width: 40px; /* Adjust based on icon size */
-  height: 40px; /* Same as width for circle */
+  width: 30px; /* Adjust based on icon size */
+  height: 30px; /* Same as width for circle */
   border-radius: 50%; /* Circular shape */
 
   font-size: 24px; /* Adjust icon size if needed */
@@ -56,12 +57,130 @@ button[mat-fab]:hover {
   opacity: 1; /* Make button fully visible on hover */
 }
 
-::ng-deep .mat-form-field.mat-focused .mat-form-field-underline {
-  display: none !important;
-}
+
 
 mat-icon {
   opacity:1;
   margin: 0; /* Remove any default margin from the icon */
+  
 }
+
+.widget-space {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px; /* Adjust width as needed */
+  height: 80vh;
+  margin: 10px auto;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-shadow:0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #54AFC3;
+}
+
+
+.upper-data {
+  position:relative;
+  overflow: hidden;
+  width:100%;
+  height:50%;
+  padding:0;
+  margin:0;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+}
+
+.lower-data{
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 50%;
+  border-bottom-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.upper-data img {
+  object-fit: cover;
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+}
+
+.weather-data{
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.location {
+  color: black;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.temp{
+  color:black;
+  text-align: center;
+  font-size: 4em;
+  font-weight: 900;
+}
+
+.more-info-label{
+  color:white;
+}
+
+.more-info-container{
+  flex:1;
+  border-bottom-left-radius:20px ;
+  border-bottom-right-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.473);
+  margin-top: 1em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.info-box{
+  width:50%;
+  display:flex;
+  flex-direction: row;
+}
+
+.info-box-label{
+  width:50%;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-box-label img{
+  width:1.5em;
+}
+
+.info-box-label span{
+  color:white;
+  font-size: .8em;
+}
+
+.info-box-value{
+  width:50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+}
+
+
   

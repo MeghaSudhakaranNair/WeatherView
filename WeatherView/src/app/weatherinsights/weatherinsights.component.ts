@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -17,7 +18,8 @@ type WeatherParameter = 'temperature' | 'pressure' | 'humidity'; // add more par
 @Component({
   selector: 'app-weatherinsights',
   templateUrl: './weatherinsights.component.html',
-  styleUrls: ['./weatherinsights.component.css']
+  styleUrls: ['./weatherinsights.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class WeatherinsightsComponent implements OnInit {
   // public chartOptions: Partial<ChartOptions>;
@@ -27,7 +29,9 @@ export class WeatherinsightsComponent implements OnInit {
   availableParameters: WeatherParameter[] = ['temperature', 'pressure', 'humidity'];
   public chartOptions: any;
   selectedChartType: any;
-  constructor(private weatherService: WeatherService) {}
+  weatherData: any;
+  wholeRec:any;
+  constructor(private weatherService: WeatherService, private snackBar: MatSnackBar ) {}
 
   ngOnInit(): void {
     this.initializeChart();
@@ -63,9 +67,15 @@ export class WeatherinsightsComponent implements OnInit {
   }
 
   getWeatherData(): void {
-    if (this.searchLocation) {
+    if (this.searchLocation.trim()) {
       this.weatherService.getWeather(this.searchLocation).subscribe(response => {
         if (response && response.list) {
+          console.log("test")
+          console.log(response)
+          console.log(response.list)
+          this.wholeRec = response;
+          const lastRec = response[response.length - 1]; // Get the last item
+          this.weatherData = lastRec;
           const data = response.list.map((item: any) => {
             let yValue;
   
@@ -91,12 +101,18 @@ export class WeatherinsightsComponent implements OnInit {
           });
           console.log(data)
           this.updateChartData(data);
+        }else {
+          // Handle empty or invalid data
+          console.warn('Invalid or empty response for the location:', this.searchLocation);
+          this.showInvalidLocationToast();
         }
       }, error => {
         console.error('Error fetching weather data:', error);
+        this.showInvalidLocationToast();
       });
     }
   }
+  
 
   updateChartData(data: any[]): void {
     this.chartOptions.series = [{
@@ -121,5 +137,13 @@ export class WeatherinsightsComponent implements OnInit {
       ...this.chartOptions.chart,
       type: this.selectedChartType
     };
+  }
+
+  showInvalidLocationToast(): void {
+    console.log("toatr")
+    this.snackBar.open('Invalid Location', 'Close', {
+      duration: 3000,
+      panelClass: ['custom-snackbar']
+    });
   }
 }
