@@ -12,6 +12,8 @@ import {
   ApexTooltip
 } from 'ng-apexcharts';
 
+import { WeatherData,CurrentWeatherData } from '../../../src/app/models/weather-data.model';
+
 type ChartType = 'line' | 'bar' | 'area'; // add more types as needed
 type WeatherParameter = 'temperature' | 'pressure' | 'humidity'; // add more parameters as needed
 
@@ -31,10 +33,14 @@ export class WeatherinsightsComponent implements OnInit {
   selectedChartType: any;
   weatherData: any;
   wholeRec:any;
+  currentWeather: any;
+  location: any;
+  showWeatherData: boolean = false;
   constructor(private weatherService: WeatherService, private snackBar: MatSnackBar ) {}
 
   ngOnInit(): void {
     this.initializeChart();
+    this.getWeatherData();
   }
 
   initializeChart(): void {
@@ -66,84 +72,105 @@ export class WeatherinsightsComponent implements OnInit {
     };
   }
 
-  getWeatherData(): void {
-    if (this.searchLocation.trim()) {
-      this.weatherService.getWeather(this.searchLocation).subscribe(response => {
-        if (response && response.list) {
-          console.log("test")
-          console.log(response)
-          console.log(response.list)
-          this.wholeRec = response;
-          const lastRec = response[response.length - 1]; // Get the last item
-          this.weatherData = lastRec;
-          const data = response.list.map((item: any) => {
-            let yValue;
-  
-            switch (this.selectedParameter) {
-              case 'temperature':
-                // Convert Kelvin to Celsius if needed
-                yValue = item.main.temp - 273.15;
-                break;
-              case 'pressure':
-                yValue = item.main.pressure;
-                break;
-              case 'humidity':
-                yValue = item.main.humidity;
-                break;
-              default:
-                yValue = item.main[this.selectedParameter];
-            }
-  
-            return {
-              x: new Date(item.dt * 1000), // Convert Unix timestamp to Date
-              y: yValue
-            };
-          });
-          console.log(data)
-          this.updateChartData(data);
-        }else {
-          // Handle empty or invalid data
-          console.warn('Invalid or empty response for the location:', this.searchLocation);
-          this.showInvalidLocationToast();
-        }
-      }, error => {
-        console.error('Error fetching weather data:', error);
+
+// getWeatherData(): void {
+//   if (this.searchLocation.trim()) {
+//     this.weatherService.getWeather(this.searchLocation).subscribe(data => {
+//       if (data && data.length) {
+//         this.currentWeather = data[data.length - 1];
+//         this.updateChartData(data);
+//       } else {
+//         console.warn('Invalid or empty response for the location:', this.searchLocation);
+//         this.showInvalidLocationToast();
+//       }
+//       console.log(data)
+//     }, error => {
+//       console.error('Error fetching weather data:', error);
+//       this.showInvalidLocationToast();
+//     });
+//   }
+// }
+
+getWeatherData(): void {
+  if (this.searchLocation.trim()) {
+    this.showWeatherData = true;
+    this.location=this.searchLocation
+    // Fetch forecast weather data
+    this.weatherService.getWeather(this.searchLocation).subscribe(forecastData => {
+      if (forecastData && forecastData.length) {
+        this.updateChartData(forecastData);
+      } else {
+        console.warn('Invalid or empty response for the forecast of location:', this.searchLocation);
         this.showInvalidLocationToast();
+      }
+      console.log('Forecast Data:', forecastData);
+    }, error => {
+      console.error('Error fetching forecast weather data:', error);
+      this.showInvalidLocationToast();
+    });
+
+    // Fetch current weather data
+    this.weatherService.getCurrentWeather(this.searchLocation).subscribe(currentData => {
+      if (currentData) {
+        
+        this.currentWeather = currentData;
+      } else {
+        console.warn('Invalid or empty response for the current weather of location:', this.searchLocation);
+        this.showInvalidLocationToast();
+      }
+      console.log('Current Weather Data:', currentData);
+    }, error => {
+      console.error('Error fetching current weather data:', error);
+      
+      // this.showWeatherData = true;
+      this.showInvalidLocationToast();
+    });
+  }else {
+    this.showWeatherData = false; // Reset showWeatherData if there's no search location
+  }
+}
+
+updateChartData(weatherData: WeatherData[]): void {
+  console.log(this.selectedParameter)
+  // console.log(weatherData.map((item) =>  item.date))
+  const chartData = weatherData.map(item => {
+    return {
+      x: item.date,
+      y: item[this.selectedParameter] // Use the selectedParameter to access the correct property
+    };
+    
+  });
+  console.log(chartData)
+
+  this.chartOptions.series = [{
+    name: this.selectedParameter,
+    data: chartData
+  }];
+}
+showInvalidLocationToast(): void {
+      console.log("toatr")
+      this.snackBar.open('Invalid Location', 'Close', {
+        duration: 3000,
+        panelClass: ['custom-snackbar']
       });
     }
-  }
-  
 
-  updateChartData(data: any[]): void {
-    this.chartOptions.series = [{
-      name: this.selectedParameter,
-      data: data
-    }];
-  }
 
-  onParameterChange(): void {
-    console.log('Selected parameter:', this.selectedParameter);
-    // this.selectedParameter = newParameter;
-  
-    this.getWeatherData(); // Fetch data with the new parameter
-  }
+    onParameterChange(): void {
+          console.log('Selected parameter:', this.selectedParameter);
+          // this.selectedParameter = newParameter;
+        
+          this.getWeatherData(); // Fetch data with the new parameter
+        }
 
-  onChartTypeChange(): void {
-    // The selectedChartType is automatically updated by [(ngModel)]
-    console.log('Selected chart type:', this.selectedChartType);
-  
-    // Update chart type in chartOptions
-    this.chartOptions.chart = {
-      ...this.chartOptions.chart,
-      type: this.selectedChartType
-    };
-  }
-
-  showInvalidLocationToast(): void {
-    console.log("toatr")
-    this.snackBar.open('Invalid Location', 'Close', {
-      duration: 3000,
-      panelClass: ['custom-snackbar']
-    });
-  }
+        onChartTypeChange(): void {
+              // The selectedChartType is automatically updated by [(ngModel)]
+              console.log('Selected chart type:', this.selectedChartType);
+            
+              // Update chart type in chartOptions
+              this.chartOptions.chart = {
+                ...this.chartOptions.chart,
+                type: this.selectedChartType
+              };
+            }
 }

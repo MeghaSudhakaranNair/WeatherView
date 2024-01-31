@@ -94,11 +94,12 @@ mat-icon {
 .lower-data{
   position: relative;
   overflow: hidden;
-  width: 100%;
+  width: 97%;
   height: 50%;
   border-bottom-left-radius: 20px;
   border-bottom-left-radius: 20px;
   padding: 1em;
+  padding-left: 1em;
   display: flex;
   flex-direction: column;
 }
@@ -149,6 +150,7 @@ mat-icon {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  overflow-y: auto;
 }
 
 .info-box{

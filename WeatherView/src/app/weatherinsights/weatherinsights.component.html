@@ -13,13 +13,14 @@
   
 
 <div class="widget-space">
+   
     <div class="upper-data">
-      <!-- <img src="../../assets/images/sunny.jpeg" *ngIf="14>15"> -->
-      <img src="../../assets/images/cold.jpeg" *ngIf="15>11">
-      <!-- <img src="../../assets/images/cloudy.jpeg" *ngIf="14>15"> -->
-      <div class="weather-data">
-        <div class="location">London</div>
-        <div class="temp">{{14.40|number: '1.0-0'}} °C</div>
+      <img src="../../assets/images/sunny.jpeg" *ngIf="currentWeather?.condition === 'Clear'">
+      <img src="../../assets/images/cloudy.jpeg" *ngIf="currentWeather?.condition === 'Clouds' || currentWeather?.condition === 'Rain'">
+      <img src="../../assets/images/cold.jpeg" *ngIf="currentWeather?.condition === 'Snow'">
+      <div class="weather-data" *ngIf="showWeatherData">
+        <div class="location">{{ this.location }}</div>
+        <div class="temp">{{ currentWeather?.currentTemperature | number: '1.2-2'}} °C</div>
 
 
       </div>
@@ -37,7 +38,7 @@
             <span>Humidity</span>
           </div>
           <div class="info-box-value">
-            10°C
+            {{ currentWeather?.humidity | number : '1.2-2'}}%
           </div>
         </div>
 
@@ -47,7 +48,7 @@
             <span>Min Temp</span>
           </div>
           <div class="info-box-value">
-            10°C
+            {{ currentWeather?.minTemperature | number : '1.2-2'}}°C
           </div>
         </div>
 
@@ -57,7 +58,7 @@
             <span>Max Temp</span>
           </div>
           <div class="info-box-value">
-            10°C
+            {{ currentWeather?.maxTemperature | number : '1.2-2'}}°C
           </div>
         </div>
 
@@ -67,7 +68,51 @@
             <span>Wind</span>
           </div>
           <div class="info-box-value">
-            10°C
+            {{ currentWeather?.windSpeed | number : '1.2-2'}} m/s
+          </div>
+        </div>
+
+
+        <div class="info-box">
+          <div class="info-box-label">
+            <img src="../../assets/images/visibility.png">
+            <span>Visibility</span>
+          </div>
+          <div class="info-box-value">
+            {{ currentWeather?.visibility | number : '1.2-2'}} m/s
+          </div>
+        </div>
+
+
+        <div class="info-box">
+          <div class="info-box-label">
+            <img src="../../assets/images/windy.png">
+            <span>Pressure</span>
+          </div>
+          <div class="info-box-value">
+            {{ currentWeather?.pressure | number : '1.2-2'}} m/s
+          </div>
+        </div>
+
+
+        <div class="info-box">
+          <div class="info-box-label">
+            <img src="../../assets/images/windy.png">
+            <span>Sunrise</span>
+          </div>
+          <div class="info-box-value">
+            {{ currentWeather?.sunrise | number : '1.2-2'}} m/s
+          </div>
+        </div>
+
+
+        <div class="info-box">
+          <div class="info-box-label">
+            <img src="../../assets/images/windy.png">
+            <span>Sunset</span>
+          </div>
+          <div class="info-box-value">
+            {{ currentWeather?.sunset | number : '1.2-2'}} m/s
           </div>
         </div>
 
