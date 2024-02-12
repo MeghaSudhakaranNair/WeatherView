@@ -17,8 +17,8 @@ export interface WeatherData {
     currentTemperature: number;
     humidity: number;
     pressure: number;
-    sunrise: Date;
-    sunset: Date;
+    sunrise: string;
+    sunset: string;
     visibility: number;
     condition: any;
 }

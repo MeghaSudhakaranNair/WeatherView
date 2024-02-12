@@ -4,142 +4,269 @@
   
   <mat-form-field appearance="fill" class="search-field">
     <input matInput placeholder="Enter location" [(ngModel)]="searchLocation" class="search-input">
-    <button matSuffix mat-fab (click)="getWeatherData()">
+    <button matSuffix mat-fab (click)="getWeatherData(searchLocation,false)">
       <mat-icon >search</mat-icon>
     </button>
     
   </mat-form-field>
 
-  
-
-<div class="widget-space">
+  <div class="weather-widgets">
+    <div class="widget current-location-weather">
+      
+      <!-- Existing widget structure for current location weather -->
+      <!-- Use 'currentWeather' or a similar object to bind data -->
+      <div class="widget-space">
    
-    <div class="upper-data">
-      <img src="../../assets/images/sunny.jpeg" *ngIf="currentWeather?.condition === 'Clear'">
-      <img src="../../assets/images/cloudy.jpeg" *ngIf="currentWeather?.condition === 'Clouds' || currentWeather?.condition === 'Rain'">
-      <img src="../../assets/images/cold.jpeg" *ngIf="currentWeather?.condition === 'Snow'">
-      <div class="weather-data" *ngIf="showWeatherData">
-        <div class="location">{{ this.location }}</div>
-        <div class="temp">{{ currentWeather?.currentTemperature | number: '1.2-2'}} °C</div>
-
-
-      </div>
+        <div class="upper-data">
+          <img src="../../assets/images/sunny.jpeg" *ngIf="currentWeather?.condition === 'Clear'">
+          <img src="../../assets/images/cloudy.jpeg" *ngIf="currentWeather?.condition === 'Clouds' || currentWeather?.condition === 'Rain'">
+          <img src="../../assets/images/cold.jpeg" *ngIf="currentWeather?.condition === 'Snow'">
+          <img src="../../assets/images/mist.jpeg" *ngIf="currentWeather?.condition === 'Mist' || currentWeather?.condition === 'Haze'">
+          <div class="weather-data">
+            <div class="location">{{ this.currLocation }}</div>
+            <div class="temp">{{ currentWeather?.currentTemperature | number: '1.2-2'}} °C</div>
+          </div>
+        </div>
+    
+    
+        <div class="lower-data">
+          <div class="more-info-label">
+            More Information
+          </div>
+          <div class="more-info-container">
+            <div class="info-box">
+              <div class="info-box-label">
+                <img src="../../assets/images/humidity.png">
+                <span>Humidity</span>
+              </div>
+              <div class="info-box-value">
+                {{ currentWeather?.humidity | number : '1.2-2'}}%
+              </div>
+            </div>
+    
+            <div class="info-box">
+              <div class="info-box-label">
+                <img src="../../assets/images/temperature.png">
+                <span>Min Temp</span>
+              </div>
+              <div class="info-box-value">
+                {{ currentWeather?.minTemperature | number : '1.2-2'}}°C
+              </div>
+            </div>
+    
+            <div class="info-box">
+              <div class="info-box-label">
+                <img src="../../assets/images/global-warming.png">
+                <span>Max Temp</span>
+              </div>
+              <div class="info-box-value">
+                {{ currentWeather?.maxTemperature | number : '1.2-2'}}°C
+              </div>
+            </div>
+    
+            <div class="info-box">
+              <div class="info-box-label">
+                <img src="../../assets/images/windy.png">
+                <span>Wind</span>
+              </div>
+              <div class="info-box-value">
+                {{ currentWeather?.windSpeed | number : '1.2-2'}} m/s
+              </div>
+            </div>
+    
+    
+            <div class="info-box">
+              <div class="info-box-label">
+                <img src="../../assets/images/visibility.png">
+                <span>Visibility</span>
+              </div>
+              <div class="info-box-value">
+                {{ currentWeather?.visibility | number : '1.2-2'}} m
+              </div>
+            </div>
+    
+    
+            <div class="info-box">
+              <div class="info-box-label">
+                <img src="../../assets/images/windy.png">
+                <span>Pressure</span>
+              </div>
+              <div class="info-box-value">
+                {{ currentWeather?.pressure | number : '1.2-2'}} mb
+              </div>
+            </div>
+    
+    
+            <div class="info-box">
+              <div class="info-box-label">
+                <img src="../../assets/images/windy.png">
+                <span>Sunrise</span>
+              </div>
+              <div class="info-box-value">
+                {{ currentWeather?.sunrise }} 
+              </div>
+            </div>
+    
+    
+            <div class="info-box">
+              <div class="info-box-label">
+                <img src="../../assets/images/windy.png">
+                <span>Sunset</span>
+              </div>
+              <div class="info-box-value">
+                {{ currentWeather?.sunset}} 
+              </div>
+            </div>
+    
+          </div>
+    
+        </div>
     </div>
-
-
-    <div class="lower-data">
-      <div class="more-info-label">
-        More Information
-      </div>
-      <div class="more-info-container">
-        <div class="info-box">
-          <div class="info-box-label">
-            <img src="../../assets/images/humidity.png">
-            <span>Humidity</span>
-          </div>
-          <div class="info-box-value">
-            {{ currentWeather?.humidity | number : '1.2-2'}}%
-          </div>
-        </div>
-
-        <div class="info-box">
-          <div class="info-box-label">
-            <img src="../../assets/images/temperature.png">
-            <span>Min Temp</span>
-          </div>
-          <div class="info-box-value">
-            {{ currentWeather?.minTemperature | number : '1.2-2'}}°C
-          </div>
-        </div>
-
-        <div class="info-box">
-          <div class="info-box-label">
-            <img src="../../assets/images/global-warming.png">
-            <span>Max Temp</span>
-          </div>
-          <div class="info-box-value">
-            {{ currentWeather?.maxTemperature | number : '1.2-2'}}°C
-          </div>
-        </div>
-
-        <div class="info-box">
-          <div class="info-box-label">
-            <img src="../../assets/images/windy.png">
-            <span>Wind</span>
-          </div>
-          <div class="info-box-value">
-            {{ currentWeather?.windSpeed | number : '1.2-2'}} m/s
-          </div>
-        </div>
-
-
-        <div class="info-box">
-          <div class="info-box-label">
-            <img src="../../assets/images/visibility.png">
-            <span>Visibility</span>
-          </div>
-          <div class="info-box-value">
-            {{ currentWeather?.visibility | number : '1.2-2'}} m/s
-          </div>
-        </div>
-
-
-        <div class="info-box">
-          <div class="info-box-label">
-            <img src="../../assets/images/windy.png">
-            <span>Pressure</span>
-          </div>
-          <div class="info-box-value">
-            {{ currentWeather?.pressure | number : '1.2-2'}} m/s
-          </div>
-        </div>
-
-
-        <div class="info-box">
-          <div class="info-box-label">
-            <img src="../../assets/images/windy.png">
-            <span>Sunrise</span>
-          </div>
-          <div class="info-box-value">
-            {{ currentWeather?.sunrise | number : '1.2-2'}} m/s
-          </div>
-        </div>
-
-
-        <div class="info-box">
-          <div class="info-box-label">
-            <img src="../../assets/images/windy.png">
-            <span>Sunset</span>
-          </div>
-          <div class="info-box-value">
-            {{ currentWeather?.sunset | number : '1.2-2'}} m/s
-          </div>
-        </div>
-
-      </div>
-
+    <div class="widget-title">My Location</div>
     </div>
+  
+    <div class="widget searched-location-weather">
+      
+      <!-- Duplicate of the existing widget structure for searched location weather -->
+      <!-- Use a different object, like 'searchedWeather', to bind data -->
+      <div class="widget-space">
+   
+        <div class="upper-data">
+          <img src="../../assets/images/sunny.jpeg" *ngIf="searchedWeather?.condition === 'Clear'">
+          <img src="../../assets/images/cloudy.jpeg" *ngIf="searchedWeather?.condition === 'Clouds' || searchedWeather?.condition === 'Rain'">
+          <img src="../../assets/images/cold.jpeg" *ngIf="searchedWeather?.condition === 'Snow'">
+          <img src="../../assets/images/mist.jpeg" *ngIf="searchedWeather?.condition === 'Mist' || searchedWeather?.condition === 'Haze'">
+          <div class="weather-data">
+            <div class="location">{{ this.location }}</div>
+            <div class="temp">{{ searchedWeather?.currentTemperature | number: '1.2-2'}} °C</div>
+    
+    
+          </div>
+        </div>
+    
+    
+        <div class="lower-data">
+          <div class="more-info-label">
+            More Information
+          </div>
+          <div class="more-info-container">
+            <div class="info-box">
+              <div class="info-box-label">
+                <img src="../../assets/images/humidity.png">
+                <span>Humidity</span>
+              </div>
+              <div class="info-box-value">
+                {{ searchedWeather?.humidity | number : '1.2-2'}}%
+              </div>
+            </div>
+    
+            <div class="info-box">
+              <div class="info-box-label">
+                <img src="../../assets/images/temperature.png">
+                <span>Min Temp</span>
+              </div>
+              <div class="info-box-value">
+                {{ searchedWeather?.minTemperature | number : '1.2-2'}}°C
+              </div>
+            </div>
+    
+            <div class="info-box">
+              <div class="info-box-label">
+                <img src="../../assets/images/global-warming.png">
+                <span>Max Temp</span>
+              </div>
+              <div class="info-box-value">
+                {{ searchedWeather?.maxTemperature | number : '1.2-2'}}°C
+              </div>
+            </div>
+    
+            <div class="info-box">
+              <div class="info-box-label">
+                <img src="../../assets/images/windy.png">
+                <span>Wind</span>
+              </div>
+              <div class="info-box-value">
+                {{ searchedWeather?.windSpeed | number : '1.2-2'}} m/s
+              </div>
+            </div>
+    
+    
+            <div class="info-box">
+              <div class="info-box-label">
+                <img src="../../assets/images/visibility.png">
+                <span>Visibility</span>
+              </div>
+              <div class="info-box-value">
+                {{ searchedWeather?.visibility | number : '1.2-2'}} m
+              </div>
+            </div>
+    
+    
+            <div class="info-box">
+              <div class="info-box-label">
+                <img src="../../assets/images/windy.png">
+                <span>Pressure</span>
+              </div>
+              <div class="info-box-value">
+                {{ searchedWeather?.pressure | number : '1.2-2'}} mb
+              </div>
+            </div>
+    
+    
+            <div class="info-box">
+              <div class="info-box-label">
+                <img src="../../assets/images/windy.png">
+                <span>Sunrise</span>
+              </div>
+              <div class="info-box-value">
+                {{ searchedWeather?.sunrise }} 
+              </div>
+            </div>
+    
+    
+            <div class="info-box">
+              <div class="info-box-label">
+                <img src="../../assets/images/windy.png">
+                <span>Sunset</span>
+              </div>
+              <div class="info-box-value">
+                {{ searchedWeather?.sunset}} 
+              </div>
+            </div>
+    
+          </div>
+    
+        </div>
+    </div>
+    <div class="widget-title">Searched Location</div>
+    </div>
+  </div>
+
+
+
+
+  
+  <div class="filter-graph-container"></div>
+
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a parameter:</mat-label>
+    <mat-select [(value)]="selectedParameter" (selectionChange)="onParameterChange()">
+      <mat-option *ngFor="let param of availableParameters" [value]="param">{{ param }}</mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 
-<div class="filter-graph-container">
-    
-  </div>
-    <label for="parameter-select">Choose a parameter:</label>
-    <select id="parameter-select" [(ngModel)]="selectedParameter" (change)="onParameterChange()">
-        <option *ngFor="let param of availableParameters" [value]="param">{{ param }}</option>
-    </select>
-
-  
-  <div>
-    <label for="chart-type-select">Choose chart type:</label>
-    <select id="chart-type-select" [(ngModel)]="selectedChartType" (change)="onChartTypeChange()">
-      <option value="line">Line</option>
-      <option value="bar">Bar</option>
-      <option value="area">Area</option>
-    </select>
-  </div>
-  
-  
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Choose chart type:</mat-label>
+    <mat-select [(value)]="selectedChartType" (selectionChange)="onChartTypeChange()">
+      <mat-option value="line">Line</mat-option>
+      <mat-option value="bar">Bar</mat-option>
+      <mat-option value="area">Area</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
   <div *ngIf="chartOptions">
     <apx-chart [series]="chartOptions?.series"
                [chart]="chartOptions?.chart"

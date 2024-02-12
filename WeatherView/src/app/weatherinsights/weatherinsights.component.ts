@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { WeatherService } from '../services/weather.service';
+import { LocationService } from '../services/location.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   ApexAxisChartSeries,
@@ -11,7 +12,7 @@ import {
   ApexStroke,
   ApexTooltip
 } from 'ng-apexcharts';
-
+import { CityNameService } from '../services/cityname.service';
 import { WeatherData,CurrentWeatherData } from '../../../src/app/models/weather-data.model';
 
 type ChartType = 'line' | 'bar' | 'area'; // add more types as needed
@@ -30,17 +31,27 @@ export class WeatherinsightsComponent implements OnInit {
   searchLocation: string = '';
   availableParameters: WeatherParameter[] = ['temperature', 'pressure', 'humidity'];
   public chartOptions: any;
-  selectedChartType: any;
+  selectedChartType: any='line';
   weatherData: any;
   wholeRec:any;
   currentWeather: any;
+  searchedWeather:any;
   location: any;
   showWeatherData: boolean = false;
-  constructor(private weatherService: WeatherService, private snackBar: MatSnackBar ) {}
+  defaultLocation: any; // Set a default location
+  currLocation: any;
+  constructor(private weatherService: WeatherService, private snackBar: MatSnackBar, private CityNameService: CityNameService, ) {}
 
   ngOnInit(): void {
     this.initializeChart();
-    this.getWeatherData();
+    this.CityNameService.cityName$.subscribe(cityName => {
+      this.defaultLocation = cityName;
+    });
+    console.log(this.defaultLocation)
+      this.getWeatherData(this.defaultLocation, true);
+    
+    
+    
   }
 
   initializeChart(): void {
@@ -73,61 +84,65 @@ export class WeatherinsightsComponent implements OnInit {
   }
 
 
-// getWeatherData(): void {
-//   if (this.searchLocation.trim()) {
-//     this.weatherService.getWeather(this.searchLocation).subscribe(data => {
-//       if (data && data.length) {
-//         this.currentWeather = data[data.length - 1];
-//         this.updateChartData(data);
-//       } else {
-//         console.warn('Invalid or empty response for the location:', this.searchLocation);
-//         this.showInvalidLocationToast();
-//       }
-//       console.log(data)
-//     }, error => {
-//       console.error('Error fetching weather data:', error);
-//       this.showInvalidLocationToast();
-//     });
-//   }
-// }
 
-getWeatherData(): void {
-  if (this.searchLocation.trim()) {
-    this.showWeatherData = true;
-    this.location=this.searchLocation
+
+getWeatherData(location: string, isDefault: boolean = false): void {
+  
+  if (location.trim()) {
+    // this.showWeatherData = true;
+    
+    
+    this.location=location
+    
     // Fetch forecast weather data
-    this.weatherService.getWeather(this.searchLocation).subscribe(forecastData => {
+    this.weatherService.getWeather(this.location).subscribe(forecastData => {
+      console.log("for",forecastData,this.location)
       if (forecastData && forecastData.length) {
+        
+        this.showWeatherData = true;
         this.updateChartData(forecastData);
+        console.log("updated")
       } else {
-        console.warn('Invalid or empty response for the forecast of location:', this.searchLocation);
+        
         this.showInvalidLocationToast();
       }
-      console.log('Forecast Data:', forecastData);
+      
     }, error => {
-      console.error('Error fetching forecast weather data:', error);
+      
       this.showInvalidLocationToast();
     });
 
     // Fetch current weather data
-    this.weatherService.getCurrentWeather(this.searchLocation).subscribe(currentData => {
-      if (currentData) {
-        
-        this.currentWeather = currentData;
-      } else {
-        console.warn('Invalid or empty response for the current weather of location:', this.searchLocation);
-        this.showInvalidLocationToast();
-      }
-      console.log('Current Weather Data:', currentData);
-    }, error => {
-      console.error('Error fetching current weather data:', error);
+    this.weatherService.getCurrentWeather(location).subscribe(currentData => {
       
-      // this.showWeatherData = true;
-      this.showInvalidLocationToast();
+      if (currentData) {
+        if (isDefault) {
+          // On initialization, both currentWeather and searchedWeather should have the default location's data
+          this.currLocation=this.location
+          this.currentWeather = currentData;
+          this.searchedWeather = currentData;
+          
+          
+        } else {
+          // Upon user search, only searchedWeather is updated
+          this.searchedWeather = currentData;
+          this.searchLocation = location; // Update searchLocation with the searched location
+          
+        }
+        console.log(this.currentWeather.condition)
+        console.log(this.searchedWeather.condition)
+      } else {
+        console.warn('Invalid or empty response for the weather of location:', location);
+      }
+
+      console.log('Weather Data:', currentData);
+    }, error => {
+      console.error('Error fetching weather data:', error);
+      // Implement showInvalidLocationToast to provide user feedback
     });
-  }else {
-    this.showWeatherData = false; // Reset showWeatherData if there's no search location
-  }
+  
+}
+  
 }
 
 updateChartData(weatherData: WeatherData[]): void {
@@ -138,7 +153,7 @@ updateChartData(weatherData: WeatherData[]): void {
       x: item.date,
       y: item[this.selectedParameter] // Use the selectedParameter to access the correct property
     };
-    
+   
   });
   console.log(chartData)
 
@@ -159,8 +174,8 @@ showInvalidLocationToast(): void {
     onParameterChange(): void {
           console.log('Selected parameter:', this.selectedParameter);
           // this.selectedParameter = newParameter;
-        
-          this.getWeatherData(); // Fetch data with the new parameter
+          const locationToFetch = this.searchLocation.trim() ? this.searchLocation : this.defaultLocation;
+          this.getWeatherData(locationToFetch); // Fetch data with the new parameter
         }
 
         onChartTypeChange(): void {

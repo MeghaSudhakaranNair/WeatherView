@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LocationService } from '../services/location.service';
+import { CityNameService } from '../services/cityname.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   slides = [
   { src: "../../assets/images/Beyond-forecast.png" },
   { src: "../../assets/images/weathercarousal.png" },
@@ -28,4 +30,19 @@ export class HomeComponent {
   
 }
 
-}
+constructor(private locationService: LocationService, private cityNameService: CityNameService) {}
+
+  ngOnInit() {
+    console.log("homeinit")
+    this.locationService.getCurrentCityName().subscribe({
+      next: cityName => {
+        this.cityNameService.setCityName(cityName);
+      },
+      error: error => console.error('Error obtaining city name:', error)
+    });
+  }
+  }
+
+  
+
+

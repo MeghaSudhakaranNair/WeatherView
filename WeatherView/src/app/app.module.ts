@@ -18,6 +18,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +42,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     HttpClientModule,
     FormsModule,
     NgChartsModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
