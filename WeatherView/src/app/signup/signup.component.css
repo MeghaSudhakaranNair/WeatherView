@@ -1,0 +1,75 @@
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1000; 
+}
+
+mat-card {
+  min-width: 300px;
+  max-width: 1000px; /* Set a maximum width for the card */
+}
+
+mat-form-field {
+  width: 90%; /* Ensure form fields take up the full width */
+  margin-bottom: 16px; /* Space out elements */
+}
+
+button {
+  width: 100%; /* Make the button take up the full width */
+  margin-top: 20px;
+}
+
+.signup-card {
+  width: auto; /* Adjust the width as needed */
+  max-height: auto; /* Adjust the height as needed */
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Add padding inside the card */
+}
+
+.signup-card form {
+  width: 100%; /* Make the form take up the full width of the card */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-card mat-card-title {
+  font-size: 24px; /* Larger font size */
+  font-weight: bold; /* Bold font */
+  color: black; /* Black color */
+  margin-bottom: 20px; /* Space below the title */
+
+}
+
+.signup-card .form-label {
+  font-size: 16px; /* Smaller font size for form labels */
+  align-self: flex-start; /* Align labels to the start of the form */
+  margin-left: 8px; /* Add some margin to align with the input fields */
+
+}
+
+.signup-card .links {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px; /* Adjust the margin as needed */
+}
+
+.signup-card .links a {
+  text-decoration: none;
+  color: #3f51b5; /* Adjust the link color as needed */
+  font-size: 14px; /* Reduce the font size */
+  margin: 0 30px; /* Increase space between the links */
+}

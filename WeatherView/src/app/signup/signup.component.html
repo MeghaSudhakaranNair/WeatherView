@@ -1,0 +1,35 @@
+<mat-card class="signup-card">
+  <mat-card-header>
+    <mat-card-title>Sign Up</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <div class="form-label">First Name</div>
+      <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="firstName" name="firstName">
+      </mat-form-field>
+
+      <div class="form-label">Last Name</div>
+      <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="lastName" name="lastName">
+      </mat-form-field>
+
+      <div class="form-label">Username</div>
+      <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="username" name="username">
+      </mat-form-field>
+
+      <div class="form-label">Password</div>
+      <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="password" name="password" type="password">
+      </mat-form-field>
+
+      <div class="links">
+        <a href="#" (click)="navigate($event, '/profile')">Click to complete your profile</a>
+        <a href="#" (click)="navigate($event, '/login')">Already a user? Login</a>
+      </div>
+
+      <button mat-raised-button color="primary" (click)="signup()">Sign Up</button>
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,71 @@
+/* login.component.css */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000; /* Ensure it sits above other content */
+}
+
+mat-card {
+  min-width: 300px;
+}
+
+mat-form-field {
+  width: 100%; /* Ensure form fields take up the full width */
+  margin-bottom: 16px; /* Space out elements */
+}
+
+button {
+  margin-top: 20px;
+}
+
+.login-card {
+  width: auto; /* 50% of the viewport width */
+  max-height: auto; /* 50% of the viewport height */
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-card form {
+  width: 100%; /* Adjust the width of the form as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-card mat-card-title {
+  font-size: 24px; /* Larger font size */
+  font-weight: bold; /* Bold font */
+  color: black; /* Black color */
+  margin-bottom: 20px; /* Space below the title */
+}
+
+.login-card .form-label {
+  font-size: 16px; /* Smaller font size for form labels */
+  align-self: flex-start; /* Align labels to the start of the form */
+  margin-left: 8px; /* Add some margin to align with the input fields */
+}
+
+.login-card .links {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px; /* Adjust the margin as needed */
+}
+
+.login-card .links a {
+  text-decoration: none;
+  color: #3f51b5; /* Adjust the link color as needed */
+  font-size: 14px; /* Reduce the font size */
+  margin: 0 30px; /* Increase space between the links */
+}

@@ -1,0 +1,26 @@
+<mat-card class="login-card">
+  <mat-card-header>
+    <mat-card-title>Login</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <div class="form-label">Username</div>
+      <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="username" name="username">
+      </mat-form-field>
+
+      <div class="form-label">Password</div>
+      <mat-form-field appearance="fill">
+        <input matInput [(ngModel)]="password" name="password" type="password">
+      </mat-form-field>
+
+      <div class="links">
+        <a href="#" (click)="navigate($event, '/signup')">Not a member? Sign up</a>
+        <a href="#" (click)="navigate($event, '/profile')">Forgot password?</a>
+      </div>
+
+      <button mat-raised-button color="primary" (click)="login()">Login</button>
+      
+    </form>
+  </mat-card-content>
+</mat-card>
