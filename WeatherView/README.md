@@ -12,15 +12,23 @@ Welcome to WeatherView, an interactive web application designed to deliver perso
 - MongoDB
 
 # Features
+<img width="963" alt="Screenshot 2024-02-12 at 2 40 21 PM" src="https://github.com/MeghaSudhakaranNair/WeatherView/assets/152733482/9531749d-3bb2-46f4-9717-1549528f4a1a">
 
 ## Login/Signup Page
 Secure user authentication to access personalized weather dashboards.
 
+
 ## Weather Dashboard
 Displays weather details for the user's current location and any searched location, leveraging the OpenWeather API for real-time data.
 
+<img width="938" alt="Screenshot 2024-02-12 at 1 23 22 PM" src="https://github.com/MeghaSudhakaranNair/WeatherView/assets/152733482/64b8f27c-b15c-4b21-ad08-88a8ca36cd15">
+
+
 ## Forecast Graphs
 Visual representations of forecast data including temperature, humidity, and pressure trends over time.
+
+<img width="971" alt="Screenshot 2024-02-12 at 2 39 57 PM" src="https://github.com/MeghaSudhakaranNair/WeatherView/assets/152733482/3d745a06-9c91-4cf1-88f7-005ed73fed0b">
+
 
 ## Profile Page
 A dedicated page for users to view and update their personal details
