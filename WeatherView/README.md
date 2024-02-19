@@ -16,6 +16,8 @@ Welcome to WeatherView, an interactive web application designed to deliver perso
 
 ## Login/Signup Page
 Secure user authentication to access personalized weather dashboards.
+<img width="1440" alt="Screenshot 2024-02-19 at 2 26 51 PM" src="https://github.com/MeghaSudhakaranNair/WeatherView/assets/152733482/5b9e47db-b700-4ba4-93cc-5e8e47947206">
+
 
 
 ## Weather Dashboard
